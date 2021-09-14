@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Kiếm Thế Hoa Sơn - Quản lý Tài Khoản</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{/image/favicon.ico}">
+
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/gsdk.css}" rel="stylesheet" />
+	<link th:href="@{/css/examples.css}" rel="stylesheet" />
+
+	<!--     Fonts and icons     -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<link th:href="@{/css/pe-icon-7-stroke.css}" rel="stylesheet" />
+</head>
+
+<body class="ecommerce">
+
+	<nav class="navbar navbar-inverse navbar-fill navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button id="menu-toggle" type="button" class="navbar-toggle">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar bar1"></span> <span
+						class="icon-bar bar2"></span>
+					<span class="icon-bar bar3"></span>
+				</button>
+				<a class="navbar-brand" href="#">HOASONKIEM.NET</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+
+			<style>
+				.icon_del {
+					top: -55px;
+					left: 100px;
+				}
+			</style>
+
+
+
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"> Trang chủ </a></li>
+					<li><a href="https://www.facebook.com/hoasonkiemthe/">
+							Fanpage </a></li>
+					<li class="dropdown">
+						<!-- tên --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Xin chào, <th:block
+								th:text="${session.accountInfo.loginName}">
+								<b>tài khoản</b>
+							</th:block> <b class="caret"></b>
+						</a> <!-- end tên -->
+						<ul class="dropdown-menu dropdown-with-icons">
+							<li><a th:href="@{/menu/nap-the}"> <i class="fa fa-usd"></i> Nạp thẻ
+								</a> <a th:href="@{/menu/thong-tin-tai-khoan}"> <i class="fa fa-info"></i> Thông tin tài
+									khoản
+								</a> <a th:href="@{/logout}"> <i class="fa fa-sign-out"></i>
+									Thoát
+								</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>
+
+	<div class="wrapper">
+		<br /> <br />
+		<div class="section" id="searchBills">
+			<div class="container">
+				<h2 class="section-title"></h2>
+				<div class="row">
+
+					<div class="col-md-12">
+						<div class="card card-user">
+
+
+							<div class="image">
+								<img src="https://i.imgur.com/VWaUJAw.png">
+							</div>
+							<div class="content">
+								<div class="author">
+									<img class="avatar" th:src="@{/image/ava/9.png}" alt="..." />
+									<h4 class="title">
+										<th:block th:text="${session.accountInfo.loginName}">tài khoản</th:block>
+										<br />
+									</h4>
+								</div>
+								<div class="table-responsive">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td><b>Đồng chưa rút:</b> [[${sumDepositeCoin}]] vạn</td>
+												<td><b>Đồng đã rút:</b> [[${sumWithdrawCoin}]] vạn</td>
+												<td><b>Ngày tham gia:</b>
+													[[${session.accountInfo.time}]]</td>
+											</tr>
+											<tr>
+												<td><a class="btn btn-fill btn-warning"
+														th:href="@{/menu/thong-tin-tai-khoan}"><i
+															class="fa fa-refresh"></i> Thay đổi thông tin</a></td>
+												<!-- <td><a class="btn btn-fill btn-primary" href="#"><i
+															class="fa fa-usd"></i> Nạp thẻ</a></td> -->
+												<td><a class="btn btn-fill btn-primary" th:href="@{/menu/nap-the}"><i class="fa fa-usd"></i>
+														Nạp thẻ</a>
+												</td>
+												<td><a class="btn btn-fill btn-default" th:href="@{/logout}"><i
+															class="fa fa-sign-out"></i>
+														Thoát</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- end card -->
+					</div>
+
+					<div class="col-md-8">
+						<div class="card">
+							<div class="content">
+								<a class="card-link" href="#">
+									<h4 class="title">
+										<i class="fa fa-info"></i> <b>THÔNG TIN TÀI KHOẢN</b>
+									</h4>
+								</a>
+								<hr />
+
+
+
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th><b>Mục</b></th>
+												<th><b>Thông tin</b></th>
+												<th><b>Thao tác</b></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Tên đăng nhập:</td>
+												<td><b>
+														<th:block th:text="${session.accountInfo.loginName}">tài khoản
+														</th:block>
+													</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Tên:</td>
+												<td>[[${session.accountInfo.cRealName}]]</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Mật khẩu cấp 1:</td>
+												<td>**********</td>
+												<td><a href="#" data-toggle="modal"
+														data-target="#doiMatKhauCap1Modal"><i class="fa fa-refresh"></i>
+														Đổi</a></td>
+											</tr>
+											<tr>
+												<td>Mật khẩu cấp 2:</td>
+												<td>[[${session.accountInfo.passwordLevel2}]]</td>
+												<td><a href="#" data-toggle="modal"
+														data-target="#doiMatKhauCap2Modal"><i class="fa fa-refresh"></i>
+														Đổi</a></td>
+											</tr>
+											<tr>
+												<td>Email:</td>
+												<td>[[${session.accountInfo.cEmail}]]</td>
+												<td>-</td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- section -->
+
+		<!-- nạp thẻ Modal -->
+		<div class="modal fade" id="napTheModal" tabindex="-1" role="dialog" aria-labelledby="napTheLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="napTheLabel">Tỉ lệ Nạp Thẻ</h4>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive">
+							<h3>Updating...</h3>
+							<!-- <table class="table">
+								<thead>
+									<tr>
+										<th class="text-center">Mệnh giá thẻ</th>
+										<th class="text-center">Đồng nhận</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center">10.000 VNĐ</td>
+										<td class="text-center">10 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">20.000 VNĐ</td>
+										<td class="text-center">20 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">30.000 VNĐ</td>
+										<td class="text-center">30 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">50.000 VNĐ</td>
+										<td class="text-center">50 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">100.000 VNĐ</td>
+										<td class="text-center">100 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">200.000 VNĐ</td>
+										<td class="text-center">200 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">300.000 VNĐ</td>
+										<td class="text-center">300 vạn Đồng</td>
+									</tr>
+									<tr>
+										<td class="text-center">500.000 VNĐ</td>
+										<td class="text-center">600 vạn Đồng<br />
+											<i>(Chỉ áp dụng với thẻ nạp mệnh giá 500.000 đ)</i>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center">1.000.000 VNĐ</td>
+										<td class="text-center">1200 vạn Đồng<br />
+											<i>(Chỉ áp dụng với thẻ nạp mệnh giá 1.000.000 đ)</i>
+										</td>
+									</tr>
+								</tbody>
+							</table> -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Đóng</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end nạp thẻ modal -->
+		<!-- đổi mật khẩu cấp 1 modal -->
+		<div class="modal fade" id="doiMatKhauCap1Modal" tabindex="-1" role="dialog"
+			aria-labelledby="doiMatKhauCap1Label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="doiMatKhauCap1Label">Đổi mật khẩu cấp 1</h4>
+					</div>
+					<form action="" method='POST'>
+						<div class="modal-body">
+							<div id="MsgLv1"></div>
+							<!-- mật khẩu mới -->
+							<div class="form-group">
+								<b>MẬT KHẨU MỚI</b>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Mật khẩu mới" class="form-control"
+									name="newPassword" id="newPassword" />
+							</div>
+							<!-- xác nhận mật khẩu mới -->
+							<div class="form-group">
+								<b>XÁC NHẬN MẬT KHẨU MỚI</b>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Xác nhận mật khẩu mới" class="form-control"
+									name="newPasswordRepeat" id="newPasswordRepeat" />
+							</div>
+							<!-- reCAPTCHA -->
+							<div class="g-recaptcha" data-sitekey="6LdR1iUaAAAAAFCbwvM-CnLWa6ELrx1G8NS6uSBO"></div>
+							<br>
+							<!-- submit button -->
+							<div class="form-group">
+								<button type="submit" id="editPasswordLv1Button" class="btn btn-info btn-fill btn-block">Đổi mật khẩu cấp
+									1</button>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Đóng</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end đổi mật khẩu cấp 1 modal -->
+
+		<!-- đổi mật khẩu cấp 2 modal -->
+		<div class="modal fade" id="doiMatKhauCap2Modal" tabindex="-1" role="dialog"
+			aria-labelledby="doiMatKhauCap2Label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="doiMatKhauCap2Label">Đổi mật khẩu cấp 2</h4>
+					</div>
+					<form action="" method='POST'>
+						<div class="modal-body">
+							<div id="MsgLv2"></div>
+							<!-- Email -->
+							<div class="form-group">
+								<b>EMAIL</b>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="EMAIL" class="form-control" name="cEmail" id="cEmail" />
+							</div>
+							<!-- mật khẩu mới -->
+							<div class="form-group">
+								<b>MẬT KHẨU CẤP 2 MỚI</b>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Mật khẩu cấp 2 mới" class="form-control"
+									name="newPasswordLv2" id="newPasswordLv2"/>
+							</div>
+							<!-- xác nhận mật khẩu mới -->
+							<div class="form-group">
+								<b>XÁC NHẬN MẬT KHẨU CẤP 2 MỚI</b>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Xác nhận mật khẩu cấp 2 mới" class="form-control"
+									name="newPasswordLv2Repeat" id="newPasswordLv2Repeat"/>
+							</div>
+							<!-- reCAPTCHA -->
+							<div class="g-recaptcha" data-sitekey="6LdR1iUaAAAAAFCbwvM-CnLWa6ELrx1G8NS6uSBO"></div>
+							<br>
+							<!-- submit button -->
+							<div class="form-group">
+								<button type="submit" id="editPasswordLv2Button" class="btn btn-info btn-fill btn-block">Đổi mật khẩu cấp
+									2</button>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Đóng</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- end đổi mật khẩu cấp 2 modal -->
+	<div class="space-50"></div>
+
+	<footer class="footer footer-transparent">
+
+		<!-- .footer-black is another class for the footer, for the transparent version, we recommend you to change the url of the image with your favourite image.          -->
+
+		<div class="container">
+			<nav class="pull-left">
+				<ul>
+					<li><a href="#"> Trang chủ </a></li>
+					<li><a href="https://www.facebook.com/hoasonkiemthe/" target="_blank">
+							Fanpage </a></li>
+				</ul>
+			</nav>
+			<div class="social-area pull-right">
+				<a href="https://www.facebook.com/hoasonkiemthe/" target="_blank"> <i class="fa fa-facebook-square"></i>
+				</a>
+			</div>
+			<div class="copyright">
+				<span>&copy; Hoa Sơn Kiếm - Chuẩn phiên bản 2009</span>
+				<br>
+				<span>Develop by TranHung</span>
+			</div>
+		</div>
+	</footer>
+	</div>
+	<!-- wrapper -->
+
+</body>
+<!--  jQuery and Bootstrap core files    -->
+<script th:src="@{/js/jquery.js}" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:src="@{/js/jquery-ui.custom.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+<!--  Plugins -->
+<script th:src="@{/js/gsdk-checkbox.js}"></script>
+<script th:src="@{/js/gsdk-morphing.js}"></script>
+<script th:src="@{/js/gsdk-radio.js}"></script>
+<script th:src="@{/js/gsdk-bootstrapswitch.js}"></script>
+<script th:src="@{/js/bootstrap-select.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/chartist.min.js}"></script>
+<script th:src="@{/js/jquery.tagsinput.js}"></script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+
+<!--  Get Shit Done Kit PRO Core javascript 	 -->
+<script th:src="@{/js/get-shit-done.js}"></script>
+
+<script type="text/javascript">
+	var big_image;
+	var transparent = true;
+
+	$().ready(function () {
+		responsive = $(window).width();
+
+		$(window).on('scroll', checkScroll);
+
+		if (responsive >= 768) {
+			big_image = $('.parallax-image').find('img');
+
+			$(window).on('scroll', function () {
+				parallax();
+				checkScroll();
+			});
+		}
+
+	});
+
+	function checkScroll() {
+		if ($(document).scrollTop() > 260) {
+			if (transparent) {
+				transparent = false;
+				$('nav[role="navigation"]').removeClass('navbar-transparent')
+					.addClass('navbar-default');
+			}
+		} else {
+			if (!transparent) {
+				transparent = true;
+				$('nav[role="navigation"]').addClass('navbar-transparent')
+					.removeClass('navbar-default');
+			}
+		}
+	}
+
+	var parallax = function () {
+		var current_scroll = $(this).scrollTop();
+
+		oVal = ($(window).scrollTop() / 3);
+		big_image.css('top', oVal);
+	};
+</script>
+	<!-- đổi mật khẩu cấp 1 -->
+	<script>
+		$(document).ready(function(){
+			$("#editPasswordLv1Button").click(function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'POST',
+					url: './menu/thong-tin-tai-khoan/doi-mat-khau-cap-1',
+					data:{
+						newPassword: $("#newPassword").val(),
+						newPasswordRepeat: $("#newPasswordRepeat").val()
+					},
+					success:function(result){
+						if (result === "Đổi mật khẩu thành công"){
+							$("#MsgLv1").removeClass().addClass("alert alert-success");
+							$("#MsgLv1").html(result);
+							setTimeout("location.reload()",500);
+						}else{
+							$("#MsgLv1").removeClass().addClass("alert alert-danger");
+							$("#MsgLv1").html(result);
+						}
+					}
+				})
+			})
+		})
+	</script>
+	<!-- end đổi mật khẩu cấp 1 -->
+	<!-- đổi mật khẩu cấp 2 -->
+	<script>
+		$(document).ready(function(){
+			$("#editPasswordLv2Button").click(function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'POST',
+					url: './menu/thong-tin-tai-khoan/doi-mat-khau-cap-2',
+					data: {
+						cEmail: $("#cEmail").val(),
+						newPasswordLv2: $("#newPasswordLv2").val(),
+						newPasswordLv2Repeat: $("#newPasswordLv2Repeat").val()
+					},
+					success: function(result){
+						if(result === "Đổi mật khẩu cấp 2 thành công."){
+							$("#MsgLv2").removeClass().addClass("alert alert-success");
+							$("#MsgLv2").html(result);
+							setTimeout("location.reload()",500);
+						}else{
+							$("#MsgLv2").removeClass().addClass("alert alert-danger");
+							$("#MsgLv2").html(result);
+						}
+					}
+				})
+			})
+		})
+	</script>
+	<!-- end đổi mật khẩu cấp 2 -->
+
+<!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v9.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution="setup_tool"
+        page_id="103801301699815"
+  logged_in_greeting="Hoa Sơn Kiếm xin chào, chúng tôi có thể giúp gì cho bạn?"
+  logged_out_greeting="Hoa Sơn Kiếm xin chào, chúng tôi có thể giúp gì cho bạn?">
+      </div>
+<!-- If you are using TypeKit.com uncomment this code otherwise you can delete it -->
+<!--
+    <script src="https://use.typekit.net/[your kit code here].js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    -->
+
+<!-- If you have retina @2x  images on your server which can be sent to iPhone/iPad/MacRetina, please uncomment the next line, otherwise you can delete it -->
+<!-- <script src="assets/js/retina.min.js"></script> -->
+
+
+</html>

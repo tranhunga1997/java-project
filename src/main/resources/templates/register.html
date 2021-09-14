@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Kiếm Thế Hoa Sơn - Đăng ký</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+	
+		 <link rel="icon" type="image/png" sizes="96x96" th:href="@{/image/favicon.ico}">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/gsdk.css}" rel="stylesheet" />
+    <link th:href="@{/css/examples.css}" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link th:href="@{/css/pe-icon-7-stroke.css}" rel="stylesheet" />
+	<!-- 	CAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js?hl=vi"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="modal-small">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-center">Đăng Ký</h4>
+                        </div>
+
+                        <form role="form" th:action="@{/dang-ky/process}"
+                            method="POST">
+                            <!-- <input type="hidden" name="_token" value="NN2Sk9pPupC4FQrXar5RFrJyJ1uDFt1snLhbwjkg" /> -->
+                            <div class="modal-body">
+                                <div class="social-area">
+                                    <a href="http://hoasonkiem.net" title="Trang chủ" class="btn btn-round btn-fill btn-social btn-twitter">
+                                        Trang chủ
+                                    </a>
+                                    <a href="https://www.facebook.com/Ki%E1%BA%BFm-Th%E1%BA%BF-Japan-105917654786302"
+                                        title="Fanpage" class="btn btn-round btn-fill btn-social btn-google">
+                                        Fanpage
+                                    </a>
+
+                                </div>
+                                <span class="divider"> or </span>
+                                
+                                <div style="color: red; font-size: 10px;" th:text="${captchaMsg}"></div>
+                                <div th:each="item : ${errList}">
+                                    <p style="color: red; font-size: 10px;">[[${item}]]</p>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <b>TÊN TÀI KHOẢN</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Tên tài khoản" maxlength="32"
+                                        class="form-control" name="loginName"/>
+                                </div>
+                                <div class="form-group">
+                                    <b>MẬT KHẨU</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Mật khẩu" class="form-control"
+                                        name="passwordHash"/>
+                                </div>
+                                <div class="form-group">
+                                    <b>XÁC NHẬN MẬT KHẨU</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Xác nhận mật khẩu" class="form-control"
+                                        name="passwordHashRepeat"/>
+                                </div>
+                                <div class="form-group">
+                                    <b>MẬT KHẨU CẤP 2</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Mật khẩu cấp 2" class="form-control"
+                                        name="passwordLevel2" />
+                                </div>
+                                <div class="form-group">
+                                    <b>XÁC NHẬN MẬT KHẨU CẤP 2</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Xác nhận mật khẩu cấp 2" class="form-control"
+                                        name="passwordLevel2Repeat"/>
+                                </div>
+                                <div class="form-group">
+                                    <b>HỌ VÀ TÊN</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Họ và tên" class="form-control"
+                                        name="cRealName"/>
+                                </div>
+                                <div class="form-group">
+                                    <b>EMAIL</b>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email" class="form-control"
+                                        name="cEmail"/>
+                                </div>
+                                <!-- reCAPTCHA -->
+                                <div class="g-recaptcha" data-sitekey="6LdR1iUaAAAAAFCbwvM-CnLWa6ELrx1G8NS6uSBO"></div>
+                                <!-- end reCAPTCHA -->
+                                <div class="form-group">
+                                    <b>ĐIỀU KHOẢN ĐĂNG KÝ</b>
+                                </div>
+                                <div class="tim-typo">
+                                    <blockquote>
+                                        <p style="font-size: 14px">
+                                            * Mỗi Email chỉ có thể sử dụng <b>DUY NHẤT 1 ACCOUNT</b>.
+                                        </p>
+                                        <p style="font-size: 14px">
+                                            * Mật khẩu cấp 2 giúp bạn lấy lại mật khẩu. Hãy ghi nhớ !
+                                        </p>
+                                        <p style="font-size: 14px">
+                                            * BQT từ chối hỗ trợ nếu bạn không cung cấp chính xác Email.
+                                        </p>
+                                    </blockquote>
+                                </div>
+                                <button type="submit" class="btn btn-info btn-fill btn-block" id="submitButton"> Đã đọc Điều Khoản và Đồng
+                                    ý Đăng Ký</button>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <span class="text-muted">Bạn muốn <a th:href="@{/dang-nhap}">đăng nhập</a> ?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+	    <!-- /#wrapper -->
+
+    <!--  jQuery and Bootstrap core files    -->
+    <script th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery-ui.custom.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/button-enable.js}" type="text/javascript"></script>
+	
+    <!--  Plugins -->
+    <script th:src="@{/js/gsdk-checkbox.js}"></script>
+    <script th:src="@{/js/gsdk-morphing.js}"></script>
+    <script th:src="@{/js/gsdk-radio.js}"></script>
+    <script th:src="@{/js/gsdk-bootstrapswitch.js}"></script>
+    <script th:src="@{/js/bootstrap-select.js}"></script>
+    <script th:src="@{/js/bootstrap-datepicker.js}"></script>
+    <script th:src="@{/js/chartist.min.js}"></script>
+    <script th:src="@{/js/jquery.tagsinput.js}"></script>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+
+    <!--  Get Shit Done Kit PRO Core javascript 	 -->
+    <script th:src="@{/js/get-shit-done.js}"></script>
+
+    <script type="text/javascript">
+        var big_image;
+        var transparent = true;
+
+        $().ready(function () {
+            responsive = $(window).width();
+
+            $(window).on('scroll', checkScroll);
+
+            if (responsive >= 768) {
+                big_image = $('.parallax-image').find('img');
+
+                $(window).on('scroll', function () {
+                    parallax();
+                    checkScroll();
+                });
+            }
+
+        });
+
+        function checkScroll() {
+            if ($(document).scrollTop() > 260) {
+                if (transparent) {
+                    transparent = false;
+                    $('nav[role="navigation"]').removeClass('navbar-transparent').addClass('navbar-default');
+                }
+            } else {
+                if (!transparent) {
+                    transparent = true;
+                    $('nav[role="navigation"]').addClass('navbar-transparent').removeClass('navbar-default');
+                }
+            }
+        }
+
+        var parallax = function () {
+            var current_scroll = $(this).scrollTop();
+
+            oVal = ($(window).scrollTop() / 3);
+            big_image.css('top', oVal);
+        };
+
+    </script>
+
+<!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v9.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution="setup_tool"
+        page_id="103801301699815"
+  logged_in_greeting="Hoa Sơn Kiếm xin chào, chúng tôi có thể giúp gì cho bạn?"
+  logged_out_greeting="Hoa Sơn Kiếm xin chào, chúng tôi có thể giúp gì cho bạn?">
+      </div>
+    <!-- If you are using TypeKit.com uncomment this code otherwise you can delete it -->
+    <!--	
+    <script src="https://use.typekit.net/[your kit code here].js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    -->
+
+    <!-- If you have retina @2x  images on your server which can be sent to iPhone/iPad/MacRetina, please uncomment the next line, otherwise you can delete it -->
+    <!-- <script src="js/retina.min.js"></script> -->
+
+</body>
+
+</html>

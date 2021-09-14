@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+		<!-- 	in ra console -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+		<!-- 	in ra file -->
+	<appender name="SAVE-TO-FILE-NAP-THE-FORM"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+<!-- 				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n -->
+					%d{dd-MM-yyyy HH:mm:ss} : %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>src/main/resources/logs/nap_the_form/log_%d{dd-MM-yyyy}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="SAVE-TO-FILE-CALL-BACK-URL"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+<!-- 				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n -->
+					%d{dd-MM-yyyy HH:mm:ss} : %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>src/main/resources/logs/call_back_url/log_%d{dd-MM-yyyy}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	<logger name="com.taikhoan.menu.controller.MenuController"
+		additivity="false" level="all">
+		<appender-ref ref="SAVE-TO-FILE-NAP-THE-FORM" />
+	</logger>
+	<logger name="com.taikhoan.napthe.controller.NapTheController"
+		additivity="false" level="all">
+		<appender-ref ref="SAVE-TO-FILE-CALL-BACK-URL" />
+	</logger>
+</configuration>
